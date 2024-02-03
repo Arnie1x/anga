@@ -9,7 +9,7 @@ export default {
       },
     },
     fontFamily: {
-      "Open Sans": ["Open Sans, sans-serif"]
+      "Open-Sans": ["Open Sans, sans-serif"]
     },
     container: {
       padding: "2rem",
