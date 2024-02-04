@@ -5,7 +5,7 @@
         class="absolute w-full bg-black bg-opacity-50 h-screen top-0 left-0 flex justify-center px-8">
         <Transition name="modal-inner">
           <div v-show="modalActive"
-            class="p-4 flex flex-col mx-32 items-center container rounded-3xl bg-opacity-20 self-start mt-32 max-w-screen-md">
+            class="p-6 flex flex-col items-center container rounded-3xl bg-opacity-20 self-start mt-32 max-w-screen-md">
             <slot />
             <button @click="$emit('close-modal')"
               class="mt-8 mx-auto py-2 px-6 bg-white text-black hover:bg-weather-secondary hover:text-white duration-150 cursor-pointer active:bg-weather-primary active:text-white">

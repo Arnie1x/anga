@@ -37,10 +37,10 @@ const getSearchResults = () => {
     if (searchQuery.value !== "") {
       try {
         const results = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxAPIKey}&types=place`
-      )
-      mapboxSearchResults.value = results.data.features;
-      console.log(mapboxSearchResults.value);
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxAPIKey}&types=place`
+        )
+        mapboxSearchResults.value = results.data.features;
+        console.log(mapboxSearchResults.value);
       } catch (error) {
         searchError.value = true
       }
