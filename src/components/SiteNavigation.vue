@@ -1,7 +1,6 @@
 <template>
   <header class="sticky top-0 p-5">
-    <nav
-      class="container bg-weather-primary rounded-full flex flex-col sm:flex-row items-center gap-4 shadow-lg text-white py-6 hover:bg-opacity-90 duration-300">
+    <nav class="container rounded-full flex flex-col sm:flex-row items-center gap-4 shadow-lg text-white py-6">
 
       <RouterLink :to="{ name: 'home' }">
         <div class="flex items-center gap-3">
@@ -12,8 +11,9 @@
 
       <div class="flex gap-4 flex-1 justify-end">
         <i @click="toggleModal"
-          class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
-        <i class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
+          class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer active:text-weather-primary"></i>
+        <i
+          class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer active:text-weather-primary"></i>
       </div>
 
       <BaseModal :modalActive="modalActive" @close-modal="toggleModal">

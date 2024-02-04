@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.container {
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.35);
+  /* border-radius: 100px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.9px);
+  -webkit-backdrop-filter: blur(6.9px);
+}
+
 button {
   border-radius: 100px;
   transition-duration: 150ms;
