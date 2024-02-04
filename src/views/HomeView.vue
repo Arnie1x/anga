@@ -7,7 +7,7 @@
         <ul v-show="mapboxSearchResults" class="w-full">
           <p v-if="searchError">Sorry, something went wrong. Please try again.</p>
           <p v-if="!searchError && mapboxSearchResults.length === 0">
-            No results match your query, try a different term.
+            No results match your query, try a different location.
           </p>
           <template v-else>
             <li v-if="searchQuery !== ''" v-for="searchResult in mapboxSearchResults" :key="searchResult.id"
