@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button {
+  border-radius: 100px;
+  transition-duration: 150ms;
+  transition-delay: 0ms;
+}
+
+/* button:hover {
+  border-radius: 8px;
+  opacity: 90%;
+} */
