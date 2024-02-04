@@ -5,10 +5,16 @@
         <input v-model="searchQuery" @input="getSearchResults" type="text" placeholder="Search for a City or State"
           class="py-2 px-1 w-full bg-transparent border-b placeholder:text-white placeholder:opacity-50 border-transparent focus:outline-none focus:border-white">
         <ul v-show="mapboxSearchResults" class="w-full">
-          <li v-for="searchResult in mapboxSearchResults" :key="searchResult.id"
-            class="cursor-pointer py-2 hover:font-medium duration-200">
-            {{ searchResult.place_name }}
-          </li>
+          <p v-if="searchError">Sorry, something went wrong. Please try again.</p>
+          <p v-if="!searchError && mapboxSearchResults.length === 0">
+            No results match your query, try a different term.
+          </p>
+          <template v-else>
+            <li v-if="searchQuery !== ''" v-for="searchResult in mapboxSearchResults" :key="searchResult.id"
+              class="cursor-pointer py-2 hover:font-medium duration-200">
+              {{ searchResult.place_name }}
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -23,16 +29,21 @@ const mapboxAPIKey = "pk.eyJ1IjoiYXJuaWUxeCIsImEiOiJjbHM3Yjg2NWIxdHh3MmxydzRqNjk
 const searchQuery = ref("")
 const queryTimeOut = ref(null)
 const mapboxSearchResults = ref(null)
+const searchError = ref(null)
 
 const getSearchResults = () => {
   clearTimeout(queryTimeOut.value)
   queryTimeOut.value = setTimeout(async () => {
     if (searchQuery.value !== "") {
-      const results = await axios.get(
+      try {
+        const results = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxAPIKey}&types=place`
       )
       mapboxSearchResults.value = results.data.features;
       console.log(mapboxSearchResults.value);
+      } catch (error) {
+        searchError.value = true
+      }
       return
     }
     mapboxSearchResults.value = null
