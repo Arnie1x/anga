@@ -6,12 +6,12 @@
           class="py-2 px-1 w-full bg-transparent border-b placeholder:text-white placeholder:opacity-50 border-transparent focus:outline-none focus:border-white">
         <ul v-show="mapboxSearchResults" class="w-full">
           <p v-if="searchError">Sorry, something went wrong. Please try again.</p>
-          <p v-if="!searchError && mapboxSearchResults.length === 0">
+          <p v-if="!searchError && mapboxSearchResults.length === 0 && searchQuery !== ''">
             No results match your query, try a different location.
           </p>
           <template v-else>
             <li v-if="searchQuery !== ''" v-for="searchResult in mapboxSearchResults" :key="searchResult.id"
-              class="cursor-pointer py-2 hover:font-medium duration-200">
+              @click="previewCity(searchResult)" class="cursor-pointer py-2 hover:font-medium duration-200">
               {{ searchResult.place_name }}
             </li>
           </template>
@@ -28,7 +28,7 @@ import axios from "axios"
 const mapboxAPIKey = "pk.eyJ1IjoiYXJuaWUxeCIsImEiOiJjbHM3Yjg2NWIxdHh3MmxydzRqNjkydmtxIn0.d2CODK03thfoLz40oI9o6w"
 const searchQuery = ref("")
 const queryTimeOut = ref(null)
-const mapboxSearchResults = ref(null)
+const mapboxSearchResults = ref([])
 const searchError = ref(null)
 
 const getSearchResults = () => {
@@ -46,8 +46,13 @@ const getSearchResults = () => {
       }
       return
     }
-    mapboxSearchResults.value = null
+    mapboxSearchResults.value = []
   }, 300)
 }
+
+const previewCity = (searchResult) => {
+  console.log(searchResult)
+}
+
 
 </script>
