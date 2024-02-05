@@ -1,9 +1,17 @@
 <template>
   <div>
-    <h1>Hello</h1>
+    <Suspense>
+      <AsyncCityView />
+
+      <template #loading>
+        <p>Loading...</p>
+      </template>
+    </Suspense>
   </div>
 </template>
 
 <script setup>
+import AsyncCityView from '@/components/AsyncCityView.vue';
+
 
 </script>
