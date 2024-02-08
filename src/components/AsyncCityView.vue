@@ -5,13 +5,21 @@
       <p>You are currently previewing the city, click the "+" icon to start tracking this city</p>
     </div>
     <!-- Weather Overview -->
-    <div class="flex flex-row container p-4 my-3 text-white rounded-3xl">
-      <div class="flex-1">
-        <img class="z-[-10px] w-[150px] h-auto absolute top-[-60px] left-[-50px]"
-          :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
-          :alt="`${weatherData.weather[0].description}`">
+    <div class="flex flex-row container p-4 my-3 text-white rounded-3xl z-0">
+      <div class="flex-1 z-10">
         <p class=" text-3xl z-10">{{ weatherData.name }}</p>
-        <p class=" text-2xl font-light capitalize">{{ weatherData.weather[0].description }}</p>
+        <div class="flex flex-row">
+          <p class=" text-2xl font-light capitalize">{{ weatherData.weather[0].description }}</p>
+          <div class="ml-1 mt-[-5px] static">
+            <img class="absolute z-[-10px] w-[45px] h-auto opacity-50 filter blur-sm"
+              :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
+              :alt="`${weatherData.weather[0].description}`">
+            <img class="absolute z-[-10px] w-[45px] h-auto opacity-90"
+              :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
+              :alt="`${weatherData.weather[0].description}`">
+          </div>
+
+        </div>
         <p class="text-sm mt-1">Last Updated: {{
           new Date(weatherData.currentTime).toLocaleDateString(
             "en-us",
@@ -40,12 +48,35 @@
         </p>
       </div>
     </div>
+
+    <!-- 3-Hour Weather -->
+    <div class="flex flex-col container p-4 my-3 rounded-3xl text-white text-xl font-semibold">
+      <p class="mb-4">3-Hour Forecast</p>
+      <div class="flex flex-row gap-10 overflow-x-scroll">
+        <div v-for="hourData in weatherData.forecast" :key="hourData.dt" class="flex flex-col gap-4 items-center mb-4">
+          <p class="whitespace-nowrap text-md font-light">
+            {{
+              new Date(hourData.dt).toLocaleTimeString("en-us", {
+                hour: "numeric",
+              })
+            }}
+          </p>
+          <img :src="`http://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`"
+            :alt="`${hourData.weather[0].description}`" class="w-auto h-[50px] object-cover">
+          <p class="font-light text-xl">
+            {{ Math.round(hourData.main.temp) }}&deg;
+          </p>
+        </div>
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 
 import axios from 'axios';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const openWeatherAPIKey = 'ff44687c4aab2884ff50d39ba2bb14a7'
@@ -56,7 +87,8 @@ const getWeatherData = async () => {
     // console.log(weatherData)
     // cal current date & time
     const localOffset = new Date().getTimezoneOffset() * 60;
-    weatherData.data.currentTime = weatherData.data.dt + localOffset
+    const utc = weatherData.data.dt * 1000 + localOffset;
+    weatherData.data.currentTime = utc + 1000
 
     // // cal hourly weather offset
     // weatherData.data.hourly.forEach((hour) => {
@@ -65,13 +97,30 @@ const getWeatherData = async () => {
     //     utc + 1000 * weatherData.data.timezone_offset;
     // });
 
+    const forecastData = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${route.query.lat}&lon=${route.query.lng}&appid=${openWeatherAPIKey}&units=metric`)
+    // console.log(forecastData)
+
+    forecastData.data.list.forEach((hour) => {
+      const utc = hour.dt * 1000 + localOffset;
+      hour.dt = utc + 1000
+      hour.dt = roundToNearestHour(new Date(hour.dt))
+    })
+
+    weatherData.data.forecast = forecastData.data.list
+
     return weatherData.data;
   } catch (error) {
     console.log(error)
   }
 }
 
+function roundToNearestHour(date) {
+  date.setMinutes(date.getMinutes() + 30);
+  date.setMinutes(0, 0, 0);
+
+  return date;
+}
+
 const weatherData = await getWeatherData()
-console.log(weatherData)
 
 </script>
