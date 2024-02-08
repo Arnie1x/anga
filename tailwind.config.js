@@ -8,6 +8,9 @@ export default {
         "weather-secondary": "#2B9DD4",
         "weather-tertiary": "#2BD4B7",
       },
+      animation: {
+        'spin-slow': 'spin 20s linear infinite'
+      }
     },
     fontFamily: {
       "Open-Sans": ["Open Sans, sans-serif"]

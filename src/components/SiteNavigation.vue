@@ -4,7 +4,7 @@
 
       <RouterLink :to="{ name: 'home' }">
         <div class="flex items-center gap-3">
-          <i class="fa-solid fa-sun text-2xl"></i>
+          <i class="fa-solid fa-sun text-2xl animate-spin-slow"></i>
           <p class="text-2xl">Anga</p>
         </div>
       </RouterLink>
