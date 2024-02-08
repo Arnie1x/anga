@@ -7,7 +7,10 @@
     <!-- Weather Overview -->
     <div class="flex flex-row container p-4 my-3 text-white rounded-3xl">
       <div class="flex-1">
-        <p class=" text-3xl">{{ weatherData.name }}</p>
+        <img class="z-[-10px] w-[150px] h-auto absolute top-[-60px] left-[-50px]"
+          :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
+          :alt="`${weatherData.weather[0].description}`">
+        <p class=" text-3xl z-10">{{ weatherData.name }}</p>
         <p class=" text-2xl font-light capitalize">{{ weatherData.weather[0].description }}</p>
         <p class="text-sm mt-1">Last Updated: {{
           new Date(weatherData.currentTime).toLocaleDateString(
