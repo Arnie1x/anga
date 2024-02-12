@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="absolute flex flex-col w-full px-5">
-      <div class="container rounded-3xl text-white flex items-center mx-auto">
+      <div class="container rounded-3xl text-white flex items-center mx-auto z-10">
         <div class="py-4 w-full">
           <input v-model="searchQuery" @input="getSearchResults" type="text" placeholder="Search for a City or State"
             class="py-2 px-1 w-full bg-transparent border-b placeholder:text-white placeholder:opacity-50 border-transparent focus:outline-none focus:border-white">

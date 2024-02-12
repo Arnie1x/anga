@@ -1,5 +1,5 @@
 <template>
-  <div class="flex py-6 mb-5 container rounded-3xl cursor-pointer shadow-md text-white">
+  <div class="flex py-6 mb-5 container rounded-3xl cursor-pointer text-white">
     <div class="flex flex-col flex-1">
       <h2 class="text-3xl">{{ city.city }}</h2>
       <h3 class="font-light">{{ city.state }}</h3>
