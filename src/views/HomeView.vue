@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 px-5">
       <Suspense>
         <CityList />
         <template #fallback>

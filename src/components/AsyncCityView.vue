@@ -70,6 +70,16 @@
 
       </div>
     </div>
+
+    <div v-if="!route.query.preview" class="flex items-center gap-2 py-12 text-white cursor-pointer">
+      <div
+        class="container flex items-center gap-2 p-4 rounded-3xl duration-150 hover:bg-red-600 hover:bg-opacity-40 active:bg-opacity-100"
+        @click="removeCity">
+        <i class="fa-solid fa-trash"></i>
+        <p>Remove City</p>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -77,7 +87,7 @@
 
 import axios from 'axios';
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const openWeatherAPIKey = 'ff44687c4aab2884ff50d39ba2bb14a7'
 const route = useRoute()
@@ -122,5 +132,15 @@ function roundToNearestHour(date) {
 }
 
 const weatherData = await getWeatherData()
+
+const router = useRouter()
+const removeCity = () => {
+  const cities = JSON.parse(localStorage.getItem("savedCities"))
+  const updatedCities = cities.filter((city) => city.id !== route.query.id)
+  localStorage.setItem("savedCities", JSON.stringify(updatedCities))
+  router.push({
+    name: 'home'
+  })
+}
 
 </script>
