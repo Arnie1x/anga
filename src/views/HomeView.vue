@@ -24,7 +24,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-
+          <CityCardSkeleton />
         </template>
       </Suspense>
     </div>
@@ -36,6 +36,7 @@ import { ref } from 'vue';
 import axios from "axios"
 import { useRouter } from 'vue-router';
 import CityList from '@/components/CityList.vue';
+import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
 
 const mapboxAPIKey = "pk.eyJ1IjoiYXJuaWUxeCIsImEiOiJjbHM3Yjg2NWIxdHh3MmxydzRqNjkydmtxIn0.d2CODK03thfoLz40oI9o6w"
 const searchQuery = ref("")

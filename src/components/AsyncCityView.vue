@@ -118,6 +118,9 @@ const getWeatherData = async () => {
 
     weatherData.data.forecast = forecastData.data.list
 
+    // Flicker Delay
+    await new Promise((res) => setTimeout(res, 1000))
+
     return weatherData.data;
   } catch (error) {
     console.log(error)
