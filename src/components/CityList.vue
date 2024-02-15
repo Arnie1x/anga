@@ -23,7 +23,7 @@ const getCities = async () => {
 
     const requests = []
 
-    const openWeatherAPIKey = 'ff44687c4aab2884ff50d39ba2bb14a7'
+    const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
     savedCities.value.forEach(city => {
       requests.push(axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=${openWeatherAPIKey}&units=metric`))
     });
