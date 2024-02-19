@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ac508cad-005f-4a52-ac56-79f307b6e862/deploy-status)](https://anga-weather.netlify.app/)
+
 # Anga: Vue.js Weather Application
 
 **Anga** is a simple and intuitive weather application built using Vue.js. It allows users to view current weather conditions and the 3-hour forecast for up to 5 days. With a user-friendly interface, Anga makes it easy to manage saved locations and add new ones.
