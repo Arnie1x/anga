@@ -38,7 +38,7 @@ import { useRouter } from 'vue-router';
 import CityList from '@/components/CityList.vue';
 import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
 
-const mapboxAPIKey = "pk.eyJ1IjoiYXJuaWUxeCIsImEiOiJjbHM3Yjg2NWIxdHh3MmxydzRqNjkydmtxIn0.d2CODK03thfoLz40oI9o6w"
+const mapboxAPIKey = import.meta.env.VITE_MAPBOX_API_KEY
 const searchQuery = ref("")
 const queryTimeOut = ref(null)
 const mapboxSearchResults = ref([])
