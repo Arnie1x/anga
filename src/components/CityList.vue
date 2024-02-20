@@ -4,8 +4,10 @@
       <CityCard :city="city" @click="goToCityView(city)" />
     </div>
   </div>
-  <p v-if="savedCities.length === 0">
-    No Locations Added. To Start Adding a Location, search in the field above.</p>
+  <div class="flex flex-col items-center text-white">
+    <p v-if="savedCities.length === 0" class="container p-4 rounded-2xl">
+      No Locations Added. To Start Adding a Location, search in the field above.</p>
+  </div>
 </template>
 
 <script setup>
